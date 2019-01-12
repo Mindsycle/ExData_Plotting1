@@ -58,7 +58,8 @@ hpc$Time <- hms(hpc$Time)
 png(filename="~/Desktop/ExData_Plotting1/plot1.png", 
     units="px", 
     width=480, 
-    height=480, 
+    height=480,
+    pointsize=8,
     res=150)
 #plot1
 hist(hpc$Global_active_power,breaks="sturges",col = "2",main="Global Active Power",ylab="Frequency",xlab="Global Active Power(kilowatts)",ylim=range(0,1200))
