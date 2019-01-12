@@ -58,7 +58,8 @@ hpc$Time <- hms(hpc$Time)
 png(filename="~/Desktop/ExData_Plotting1/plot2.png", 
     units="px", 
     width=480, 
-    height=480, 
+    height=480,
+    pointsize=8,
     res=150)
 
 #plot2
