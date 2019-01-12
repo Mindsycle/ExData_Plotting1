@@ -40,24 +40,11 @@ if(require("dplyr")){
   }
 }
 
-# require stringr and attempt to install if package is not loaded
-# this package is essential for strings
-if(require("stringr")){
-  print("stringr is loaded correctly")
-} else {
-  print("trying to install stringr")
-  install.packages("stringr")
-  if(require(stringr)){
-    print("stringr installed and loaded")
-  } else {
-    stop("could not install stringr")
-  }
-}
-
 
 #read the text file
 hpc <- read.csv.sql("~/Desktop/da/household_power_consumption.txt", "select * from file where Date = '1/2/2007' or Date = '2/2/2007'", sep=";",stringsAsFactors=FALSE)
 
+#create new column with date and time as a single value
 hpc$datetime <- with(hpc,dmy(hpc$Date)+hms(hpc$Time))
 
 
@@ -67,7 +54,16 @@ hpc$Date <- dmy(hpc$Date)
 hpc$Time <- hms(hpc$Time)
 
 
+#prepare for generating the png file
+png(filename="~/Desktop/ExData_Plotting1/plot1.png", 
+    units="px", 
+    width=480, 
+    height=480, 
+    res=150)
+#plot1
+hist(hpc$Global_active_power,breaks="sturges",col = "2",main="Global Active Power",ylab="Frequency",xlab="Global Active Power(kilowatts)",ylim=range(0,1200))
 
+dev.off()
 
 
 
