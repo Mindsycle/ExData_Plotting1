@@ -26,19 +26,6 @@ if(require("lubridate")){
   }
 }
 
-# require dplyr and attempt to install if package is not loaded
-# this package is essential for data wrangling
-if(require("dplyr")){
-  print("dplyr is loaded correctly")
-} else {
-  print("trying to install dplyr")
-  install.packages("dplyr")
-  if(require(dplyr)){
-    print("dplyr installed and loaded")
-  } else {
-    stop("could not install dplyr")
-  }
-}
 
 
 #read the text file
@@ -48,12 +35,6 @@ hpc <- read.csv.sql("~/Desktop/da/household_power_consumption.txt", "select * fr
 hpc$datetime <- with(hpc,dmy(hpc$Date)+hms(hpc$Time))
 
 
-#convert Date from character to right format
-hpc$Date <- dmy(hpc$Date)
-#convert Time from character to right format
-hpc$Time <- hms(hpc$Time)
-
-
 #prepare for generating the png file
 png(filename="~/Desktop/ExData_Plotting1/plot1.png", 
     units="px", 
@@ -61,6 +42,7 @@ png(filename="~/Desktop/ExData_Plotting1/plot1.png",
     height=480,
     pointsize=8,
     res=150)
+
 #plot1
 hist(hpc$Global_active_power,breaks="sturges",col = "2",main="Global Active Power",ylab="Frequency",xlab="Global Active Power(kilowatts)",ylim=range(0,1200))
 
